@@ -1,0 +1,31 @@
+# 启动前加载
+server:
+  port: 1113
+spring:
+  application:
+    name: student-center
+  security:
+    ignored: /**
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+      profile: dev
+      #failFast: true
+      name: ${spring.application.name}
+  jpa:
+    show-sql: true
+eureka:
+  server:
+    hostname: 192.168.1.206
+  client:
+    serviceUrl:
+      defaultZone:  http://${eureka.server.hostname}:${eureka.client.eureka-server-port}/eureka/
+    eureka-server-port: 1111
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    com.netflix.hystrix: debug
